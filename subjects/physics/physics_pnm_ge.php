@@ -2,49 +2,60 @@
 session_start();
 
 // Initialize session variables if they are not already set
-if (!isset($_SESSION['datacode'])) {
-    $_SESSION['datacode'] = '';
+$fields = [
+    'pnm_GE_AE', 'pnm_GE_SC', 'pnm_GE_GG', 'pnm_GE_GHE', 'pnm_GE_EBP'
+];
+
+foreach ($fields as $field) {
+    if (!isset($_SESSION[$field])) {
+        $_SESSION[$field] = '';
+    }
 }
 
 // Save data when the form is submitted
 if (isset($_POST['save'])) {
-    if (isset($_POST['datacode'])) {
-        $_SESSION['datacode'] = $_POST['datacode'];
+    foreach ($fields as $field) {
+        if (isset($_POST[$field])) {
+            $_SESSION[$field] = $_POST[$field];
+        }
     }
 }
 
 // Retrieve data to pre-populate the text areas
-$datacode = $_SESSION['datacode'];
+$data = [];
+foreach ($fields as $field) {
+    $data[$field] = $_SESSION[$field];
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Physics: A</title>
-    <style> 
+    <title>Physics: Greenhouse Effect and Energy Balance</title>
+    <style>
         ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        background-color: #333;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
         }
 
         li {
-        float: left;
+            float: left;
         }
 
         li a {
-        display: block;
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
         }
 
         li a:hover {
-        background-color: #111;
+            background-color: #111;
         }
     </style>
 
@@ -60,7 +71,6 @@ $datacode = $_SESSION['datacode'];
             paste_data_images: true,
             content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
         });
-
     </script>
 </head>
 <body>
@@ -72,11 +82,26 @@ $datacode = $_SESSION['datacode'];
         <li><a href="../cs.php">Computer Science</a></li>
         <li><a href="../enviro.php">Enviro</a></li>
     </ul>
-    <h1>Section title</h1>
-    <h2>Subheading</h2>
+    <h1>Greenhouse Effect and Energy Balance</h1>
     <form method="post" action="">
-        <label for="datacode"><h3>LO: Question...?:</h3></label>
-        <textarea id="datacode" name="datacode" rows="5" cols="50"><?php echo htmlspecialchars($datacode); ?></textarea><br>
+        <label for="pnm_GE_AE"><h3>Albedo & Emissivity:</h3></label>
+        <textarea id="pnm_GE_AE" name="pnm_GE_AE" rows="5" cols="50"><?php echo htmlspecialchars($data['pnm_GE_AE']); ?></textarea><br>
+        <button type="submit" name="save">Save Data</button>
+
+        <label for="pnm_GE_SC"><h3>The Solar Constant:</h3></label>
+        <textarea id="pnm_GE_SC" name="pnm_GE_SC" rows="5" cols="50"><?php echo htmlspecialchars($data['pnm_GE_SC']); ?></textarea><br>
+        <button type="submit" name="save">Save Data</button>
+
+        <label for="pnm_GE_GG"><h3>Greenhouse Gases:</h3></label>
+        <textarea id="pnm_GE_GG" name="pnm_GE_GG" rows="5" cols="50"><?php echo htmlspecialchars($data['pnm_GE_GG']); ?></textarea><br>
+        <button type="submit" name="save">Save Data</button>
+
+        <label for="pnm_GE_GHE"><h3>The Greenhouse Effect:</h3></label>
+        <textarea id="pnm_GE_GHE" name="pnm_GE_GHE" rows="5" cols="50"><?php echo htmlspecialchars($data['pnm_GE_GHE']); ?></textarea><br>
+        <button type="submit" name="save">Save Data</button>
+
+        <label for="pnm_GE_EBP"><h3>Energy Balance Problems:</h3></label>
+        <textarea id="pnm_GE_EBP" name="pnm_GE_EBP" rows="5" cols="50"><?php echo htmlspecialchars($data['pnm_GE_EBP']); ?></textarea><br>
         <button type="submit" name="save">Save Data</button>
     </form>
 
