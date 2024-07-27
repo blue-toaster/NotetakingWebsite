@@ -84,7 +84,7 @@ foreach ($fields as $field) {
         <li><a href="../cs.php">Computer Science</a></li>
         <li><a href="../enviro.php">Enviro</a></li>
     </ul>
-    <h1>Thermal and Equilibrium Concepts</h1>
+    <h1>Thermal Energy Transfers</h1>
     <form method="post" action="">
         <label for="pnm_tet_SLG"><h3>Solids, Liquids & Gases:</h3></label>
         <textarea id="pnm_tet_SLG" name="pnm_tet_SLG" rows="5" cols="50"><?php echo htmlspecialchars($data['pnm_tet_SLG']); ?></textarea><br>
