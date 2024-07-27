@@ -2,49 +2,61 @@
 session_start();
 
 // Initialize session variables if they are not already set
-if (!isset($_SESSION['datacode'])) {
-    $_SESSION['datacode'] = '';
+$fields = [
+    'pnm_gl_GP', 'pnm_gl_AOS', 'pnm_gl_GL', 'pnm_gl_IGE', 'pnm_gl_KTG', 
+    'pnm_gl_DKTGE', 'pnm_gl_AKEM'
+];
+
+foreach ($fields as $field) {
+    if (!isset($_SESSION[$field])) {
+        $_SESSION[$field] = '';
+    }
 }
 
 // Save data when the form is submitted
 if (isset($_POST['save'])) {
-    if (isset($_POST['datacode'])) {
-        $_SESSION['datacode'] = $_POST['datacode'];
+    foreach ($fields as $field) {
+        if (isset($_POST[$field])) {
+            $_SESSION[$field] = $_POST[$field];
+        }
     }
 }
 
 // Retrieve data to pre-populate the text areas
-$datacode = $_SESSION['datacode'];
+$data = [];
+foreach ($fields as $field) {
+    $data[$field] = $_SESSION[$field];
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Physics: A</title>
-    <style> 
+    <title>Physics: Gas Laws and Kinetic Theory</title>
+    <style>
         ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        background-color: #333;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
         }
 
         li {
-        float: left;
+            float: left;
         }
 
         li a {
-        display: block;
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
         }
 
         li a:hover {
-        background-color: #111;
+            background-color: #111;
         }
     </style>
 
@@ -60,7 +72,6 @@ $datacode = $_SESSION['datacode'];
             paste_data_images: true,
             content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
         });
-
     </script>
 </head>
 <body>
@@ -72,11 +83,34 @@ $datacode = $_SESSION['datacode'];
         <li><a href="../cs.php">Computer Science</a></li>
         <li><a href="../enviro.php">Enviro</a></li>
     </ul>
-    <h1>Section title</h1>
-    <h2>Subheading</h2>
+    <h1>Gas Laws and Kinetic Theory</h1>
     <form method="post" action="">
-        <label for="datacode"><h3>LO: Question...?:</h3></label>
-        <textarea id="datacode" name="datacode" rows="5" cols="50"><?php echo htmlspecialchars($datacode); ?></textarea><br>
+        <label for="pnm_gl_GP"><h3>Gas Pressure:</h3></label>
+        <textarea id="pnm_gl_GP" name="pnm_gl_GP" rows="5" cols="50"><?php echo htmlspecialchars($data['pnm_gl_GP']); ?></textarea><br>
+        <button type="submit" name="save">Save Data</button>
+
+        <label for="pnm_gl_AOS"><h3>Amount of Substance:</h3></label>
+        <textarea id="pnm_gl_AOS" name="pnm_gl_AOS" rows="5" cols="50"><?php echo htmlspecialchars($data['pnm_gl_AOS']); ?></textarea><br>
+        <button type="submit" name="save">Save Data</button>
+
+        <label for="pnm_gl_GL"><h3>Gas Laws:</h3></label>
+        <textarea id="pnm_gl_GL" name="pnm_gl_GL" rows="5" cols="50"><?php echo htmlspecialchars($data['pnm_gl_GL']); ?></textarea><br>
+        <button type="submit" name="save">Save Data</button>
+
+        <label for="pnm_gl_IGE"><h3>Ideal Gas Equation:</h3></label>
+        <textarea id="pnm_gl_IGE" name="pnm_gl_IGE" rows="5" cols="50"><?php echo htmlspecialchars($data['pnm_gl_IGE']); ?></textarea><br>
+        <button type="submit" name="save">Save Data</button>
+
+        <label for="pnm_gl_KTG"><h3>Kinetic Theory of Gases:</h3></label>
+        <textarea id="pnm_gl_KTG" name="pnm_gl_KTG" rows="5" cols="50"><?php echo htmlspecialchars($data['pnm_gl_KTG']); ?></textarea><br>
+        <button type="submit" name="save">Save Data</button>
+
+        <label for="pnm_gl_DKTGE"><h3>Derivation of the Kinetic Theory of Gases Equation:</h3></label>
+        <textarea id="pnm_gl_DKTGE" name="pnm_gl_DKTGE" rows="5" cols="50"><?php echo htmlspecialchars($data['pnm_gl_DKTGE']); ?></textarea><br>
+        <button type="submit" name="save">Save Data</button>
+
+        <label for="pnm_gl_AKEM"><h3>Average Kinetic Energy of a Molecule:</h3></label>
+        <textarea id="pnm_gl_AKEM" name="pnm_gl_AKEM" rows="5" cols="50"><?php echo htmlspecialchars($data['pnm_gl_AKEM']); ?></textarea><br>
         <button type="submit" name="save">Save Data</button>
     </form>
 
