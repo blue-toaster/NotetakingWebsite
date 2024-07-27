@@ -82,7 +82,7 @@ foreach ($fields as $field) {
         <li><a href="../cs.php">Computer Science</a></li>
         <li><a href="../enviro.php">Enviro</a></li>
     </ul>
-    <h1>Greenhouse Effect and Energy Balance</h1>
+    <h1>Greenhouse Effect</h1>
     <form method="post" action="">
         <label for="pnm_GE_AE"><h3>Albedo & Emissivity:</h3></label>
         <textarea id="pnm_GE_AE" name="pnm_GE_AE" rows="5" cols="50"><?php echo htmlspecialchars($data['pnm_GE_AE']); ?></textarea><br>
